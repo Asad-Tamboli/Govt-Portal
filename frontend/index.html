@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Smartphone Yojna - Application Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --saffron: #FF6B00; --green: #138808; --navy: #000080;
+    --gold: #FFC107; --light-bg: #FFF8F0; --card: #FFFFFF;
+    --border: #e0c9a6; --text: #1a1a2e; --muted: #6b7280;
+  }
+  body { font-family: 'Noto Sans', sans-serif; background: var(--light-bg); color: var(--text); }
+
+  .slider-wrap { position: relative; width: 100%; overflow: hidden; height: 220px; background: #000; }
+  .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateY(40px); }
+  .slide.active { opacity: 1; transform: translateY(0); }
+  .slide-bg { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 20px; position: relative; overflow: hidden; }
+  .slide-1 { background: linear-gradient(135deg, #FF6B00, #FF8C00, #FFA500); }
+  .slide-2 { background: linear-gradient(135deg, #000080, #0033cc, #0055ff); }
+  .slide-3 { background: linear-gradient(135deg, #138808, #1ab010, #22c55e); }
+  .slide-4 { background: linear-gradient(135deg, #7c3aed, #9f1fcc, #c026d3); }
+  .slide-icon { font-size: 52px; margin-bottom: 10px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3)); animation: bounce 2s infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  .slide-title { font-family: 'Baloo 2', cursive; font-size: 22px; font-weight: 800; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.4); line-height: 1.2; }
+  .slide-sub { font-size: 13px; color: rgba(255,255,255,0.9); margin-top: 6px; font-weight: 500; }
+  .slide-badge { display: inline-block; background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.5); color: #fff; border-radius: 20px; padding: 3px 16px; font-size: 11px; font-weight: 700; margin-top: 10px; letter-spacing: 1px; }
+  .slider-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.3s; border: none; }
+  .dot.active { background: #fff; width: 22px; border-radius: 4px; }
+  .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); border: none; color: #fff; font-size: 20px; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .slider-arrow:hover { background: rgba(255,255,255,0.4); }
+  .arrow-left { left: 12px; } .arrow-right { right: 12px; }
+
+  .tricolor { display: flex; height: 7px; }
+  .tricolor span { flex: 1; }
+  .tc-s { background: #FF6B00; } .tc-w { background: #fff; } .tc-g { background: #138808; }
+
+  .header { background: linear-gradient(135deg, #FF6B00, #FF8C00 50%, #138808); padding: 22px 16px 18px; text-align: center; }
+  .emblem { font-size: 44px; margin-bottom: 6px; }
+  .gov-label { font-family: 'Baloo 2', cursive; font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.85); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .scheme-title { font-family: 'Baloo 2', cursive; font-size: 20px; font-weight: 800; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.3); line-height: 1.2; }
+  .scheme-sub { font-size: 12px; color: rgba(255,255,255,0.9); margin-top: 4px; }
+  .hdr-badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: #fff; border-radius: 20px; padding: 3px 14px; font-size: 11px; font-weight: 600; margin-top: 8px; }
+
+  .notice { max-width: 780px; margin: 18px auto 0; padding: 0 16px; }
+  .notice-box { background: #FFF3CD; border-left: 4px solid #FFC107; border-radius: 8px; padding: 11px 15px; font-size: 13px; color: #7d5a00; line-height: 1.6; }
+  .notice-box strong { color: #e65c00; }
+
+  .form-wrap { max-width: 780px; margin: 18px auto 0; padding: 0 16px 40px; }
+  .section-card { background: #fff; border-radius: 14px; border: 1px solid var(--border); padding: 22px 22px 18px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .section-title { font-family: 'Baloo 2', cursive; font-size: 15px; font-weight: 700; color: var(--saffron); display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px dashed #FFE0B2; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 13px; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 12px; font-weight: 600; color: var(--navy); }
+  .field input, .field select, .field textarea { border: 1.5px solid var(--border); border-radius: 8px; padding: 9px 12px; font-size: 14px; font-family: 'Noto Sans', sans-serif; color: var(--text); background: #FAFAFA; transition: border-color 0.2s, box-shadow 0.2s; outline: none; width: 100%; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--saffron); box-shadow: 0 0 0 3px rgba(255,107,0,0.1); background: #fff; }
+  .field select { appearance: none; cursor: pointer; }
+  .field textarea { resize: vertical; min-height: 70px; }
+  .radio-group { display: flex; gap: 16px; flex-wrap: wrap; padding-top: 4px; }
+  .radio-opt { display: flex; align-items: center; gap: 6px; font-size: 13px; cursor: pointer; }
+  .radio-opt input { width: auto; margin: 0; accent-color: var(--saffron); }
+
+  .photo-row { display: flex; gap: 18px; align-items: flex-start; }
+  .photo-upload-wrap { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .photo-box { width: 105px; height: 125px; border: 2px dashed #FFC107; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFDE7; cursor: pointer; text-align: center; padding: 10px; position: relative; overflow: hidden; transition: all 0.2s; }
+  .photo-box:hover { border-color: var(--saffron); background: #FFF3E0; }
+  .photo-box input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .photo-box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: none; }
+  .photo-box.has-photo .ph-icon, .photo-box.has-photo .ph-text { display: none; }
+  .photo-box.has-photo img { display: block; }
+  .photo-box .ph-icon { font-size: 26px; margin-bottom: 5px; }
+  .photo-box .ph-text { font-size: 10px; color: var(--muted); line-height: 1.4; }
+  .photo-clear-btn { font-size: 11px; color: #e53e3e; background: none; border: none; cursor: pointer; display: none; }
+  .photo-upload-wrap.has-photo .photo-clear-btn { display: block; }
+  .photo-fields { flex: 1; width: 100%; }
+
+  .doc-list { display: flex; flex-direction: column; gap: 9px; }
+  .doc-item { display: flex; align-items: center; gap: 10px; background: #F8FAF8; border: 1.5px solid #d4edda; border-radius: 8px; padding: 10px 14px; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+  .doc-item:hover { border-color: var(--green); background: #EFF8EF; }
+  .doc-item input { accent-color: var(--green); width: auto; }
+  .doc-item .doc-icon { font-size: 18px; }
+
+  .sig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .sig-wrap { display: flex; flex-direction: column; gap: 5px; }
+  .sig-wrap label { font-size: 12px; font-weight: 600; color: var(--navy); }
+  .sig-canvas-wrap { position: relative; border: 1.5px solid var(--border); border-radius: 8px; background: #fafafa; overflow: hidden; }
+  .sig-canvas-wrap canvas { display: block; cursor: crosshair; touch-action: none; }
+  .sig-canvas-wrap .sig-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 12px; pointer-events: none; transition: opacity 0.2s; }
+  .sig-canvas-wrap.signed .sig-placeholder { opacity: 0; }
+  .sig-actions { display: flex; gap: 8px; margin-top: 4px; }
+  .sig-clear { font-size: 11px; color: #e53e3e; background: none; border: 1px solid #e53e3e; border-radius: 20px; padding: 2px 10px; cursor: pointer; }
+
+  .field-num { display: inline-block; background: var(--saffron); color: #fff; border-radius: 50%; width: 20px; height: 20px; font-size: 10px; font-weight: 700; line-height: 20px; text-align: center; margin-right: 4px; flex-shrink: 0; }
+  .submit-area { text-align: center; padding: 6px 0 0; }
+  .btn-submit { background: linear-gradient(135deg, #FF6B00, #FF8C00); color: #fff; border: none; border-radius: 50px; padding: 14px 48px; font-family: 'Baloo 2', cursive; font-size: 17px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 20px rgba(255,107,0,0.35); transition: all 0.2s; }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,107,0,0.45); }
+  .print-btn { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 2px solid var(--navy); color: var(--navy); border-radius: 50px; padding: 10px 28px; font-family: 'Baloo 2', cursive; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: all 0.2s; }
+  .print-btn:hover { background: var(--navy); color: #fff; }
+
+  @media(max-width: 560px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .photo-row { flex-direction: column; align-items: center; }
+    .section-card { padding: 16px 13px; }
+    .sig-row { grid-template-columns: 1fr; }
+    .slider-wrap { height: 180px; }
+    .slide-title { font-size: 17px; }
+    .slide-icon { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDER -->
+<div class="slider-wrap">
+  <div class="slide active"><div class="slide-bg slide-1"><div class="slide-icon">📱</div><div class="slide-title">Free Smartphone Yojna 2024</div><div class="slide-sub">Empowering Girls Through Digital India</div><div class="slide-badge">🇮🇳 Government of India</div></div></div>
+  <div class="slide"><div class="slide-bg slide-2"><div class="slide-icon">🎓</div><div class="slide-title">Education First,<br>Digital Always</div><div class="slide-sub">For Unemployed Educated Girls</div><div class="slide-badge">✅ SC / ST Priority</div></div></div>
+  <div class="slide"><div class="slide-bg slide-3"><div class="slide-icon">👧</div><div class="slide-title">Beti Bachao, Beti Padhao</div><div class="slide-sub">Single Parent Families — Apply Now!</div><div class="slide-badge">🆓 100% Free Scheme</div></div></div>
+  <div class="slide"><div class="slide-bg slide-4"><div class="slide-icon">🌟</div><div class="slide-title">Digital India<br>Empowers Every Girl</div><div class="slide-sub">Fill the form below to apply today</div><div class="slide-badge">📋 Apply Online Now</div></div></div>
+  <button class="slider-arrow arrow-left" onclick="changeSlide(-1)">&#8249;</button>
+  <button class="slider-arrow arrow-right" onclick="changeSlide(1)">&#8250;</button>
+  <div class="slider-dots">
+    <button class="dot active" onclick="goSlide(0)"></button>
+    <button class="dot" onclick="goSlide(1)"></button>
+    <button class="dot" onclick="goSlide(2)"></button>
+    <button class="dot" onclick="goSlide(3)"></button>
+  </div>
+</div>
+
+<div class="tricolor"><span class="tc-s"></span><span class="tc-w"></span><span class="tc-g"></span></div>
+<div class="header">
+  <div class="emblem">🇮🇳</div>
+  <div class="gov-label">Government of India — Digital Empowerment Initiative</div>
+  <div class="scheme-title">Free Smartphone Yojna<br>Application Form</div>
+  <div class="scheme-sub">Indian Government Educated Unemployment Smartphone Scheme</div>
+  <div class="hdr-badge">🎓 Girls Only — SC/ST Priority</div>
+</div>
+<div class="tricolor"><span class="tc-g"></span><span class="tc-w"></span><span class="tc-s"></span></div>
+
+<!-- NOTICE -->
+<div class="notice">
+  <div class="notice-box">
+    <strong>⚠️ Important Notice:</strong> This scheme is applicable only for <strong>unmarried girl applicants from single parent families</strong>. Priority will be given to <strong>SC and ST category</strong> girl candidates. Applicants must attach all required documents for verification.
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-wrap">
+  <form id="mainForm" onsubmit="handleSubmit(event)">
+
+    <div class="section-card">
+      <div class="section-title">👤 Personal Details</div>
+      <div class="photo-row">
+        <div class="photo-upload-wrap" id="photoWrap">
+          <div class="photo-box" id="photoBox">
+            <input type="file" accept="image/*" id="photoInput">
+            <img id="photoPreview" alt="Photo Preview">
+            <div class="ph-icon">📷</div>
+            <div class="ph-text">Attach Passport<br>Size Photo</div>
+          </div>
+          <button type="button" class="photo-clear-btn" onclick="clearPhoto()">✕ Remove</button>
+        </div>
+        <div class="photo-fields">
+          <div class="grid-2" style="margin-bottom:13px">
+            <div class="field">
+              <label><span class="field-num">1</span>Full Name<span style="color:var(--saffron)">*</span></label>
+              <input type="text" placeholder="Enter full name" required>
+            </div>
+            <div class="field">
+              <label><span class="field-num">6</span>Date of Birth<span style="color:var(--saffron)">*</span></label>
+              <input type="date" required>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label><span class="field-num">2</span>Father's / Mother's Name<span style="color:var(--saffron)">*</span></label>
+              <input type="text" placeholder="Parent name" required>
+            </div>
+            <div class="field">
+              <label><span class="field-num">3</span>Single Parent Name<span style="color:var(--saffron)">*</span></label>
+              <input type="text" placeholder="Single parent name" required>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:13px">
+        <div class="field">
+          <label><span class="field-num">4</span>Gender</label>
+          <div class="radio-group"><label class="radio-opt"><input type="radio" name="gender" value="Female" checked> Female</label></div>
+        </div>
+        <div class="field">
+          <label><span class="field-num">5</span>Marital Status</label>
+          <div class="radio-group"><label class="radio-opt"><input type="radio" name="marital" value="Unmarried" checked> Unmarried</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">📞 Contact & Identity</div>
+      <div class="grid-2">
+        <div class="field"><label><span class="field-num">7</span>Mobile Number<span style="color:var(--saffron)">*</span></label><input type="tel" placeholder="10-digit mobile number" maxlength="10" required></div>
+        <div class="field"><label><span class="field-num">19</span>Email ID</label><input type="email" placeholder="example@email.com"></div>
+        <div class="field"><label><span class="field-num">8</span>Aadhaar Number<span style="color:var(--saffron)">*</span></label><input type="text" id="aadhaar" placeholder="XXXX XXXX XXXX" maxlength="14" required></div>
+        <div class="field"><label><span class="field-num">9</span>PAN Card Number</label><input type="text" id="pan" placeholder="ABCDE1234F" maxlength="10"></div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">🎓 Educational Details</div>
+      <div class="grid-2">
+        <div class="field"><label><span class="field-num">10</span>Qualification<span style="color:var(--saffron)">*</span></label>
+          <select required><option value="">-- Select --</option><option>10th Pass</option><option>12th Pass</option><option>ITI / Diploma</option><option>Graduate (B.A./B.Sc./B.Com)</option><option>Post Graduate</option><option>Other</option></select>
+        </div>
+        <div class="field"><label><span class="field-num">11</span>College / School Name<span style="color:var(--saffron)">*</span></label><input type="text" placeholder="Institution name" required></div>
+        <div class="field"><label><span class="field-num">12</span>Course / Stream</label><input type="text" placeholder="e.g. Science, Arts, B.Tech"></div>
+        <div class="field"><label><span class="field-num">13</span>Percentage / CGPA</label><input type="text" placeholder="e.g. 75% or 7.5 CGPA"></div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">💼 Employment & Economic Status</div>
+      <div class="grid-2">
+        <div class="field"><label><span class="field-num">14</span>Employment Status<span style="color:var(--saffron)">*</span></label>
+          <select required><option value="">-- Select --</option><option>Unemployed</option><option>Student</option></select>
+        </div>
+        <div class="field"><label><span class="field-num">15</span>Annual Family Income (₹)<span style="color:var(--saffron)">*</span></label><input type="number" placeholder="e.g. 120000" required></div>
+        <div class="field"><label><span class="field-num">20</span>Category<span style="color:var(--saffron)">*</span></label>
+          <select required><option value="">-- Select --</option><option>General</option><option>OBC</option><option>SC</option><option>ST</option><option>Other</option></select>
+        </div>
+        <div class="field"><label><span class="field-num">21</span>Existing Smartphone?</label>
+          <div class="radio-group" style="margin-top:6px">
+            <label class="radio-opt"><input type="radio" name="smartphone" value="Yes"> Yes</label>
+            <label class="radio-opt"><input type="radio" name="smartphone" value="No" checked> No</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">🏠 Residential Address</div>
+      <div class="field" style="margin-bottom:13px">
+        <label><span class="field-num">16</span>Full Residential Address<span style="color:var(--saffron)">*</span></label>
+        <textarea placeholder="House No., Street, Village/Town..." required></textarea>
+      </div>
+      <div class="grid-3">
+        <div class="field"><label><span class="field-num">17</span>District<span style="color:var(--saffron)">*</span></label><input type="text" placeholder="District" required></div>
+        <div class="field"><label>State<span style="color:var(--saffron)">*</span></label>
+          <select required><option value="">-- State --</option><option>Maharashtra</option><option>Uttar Pradesh</option><option>Bihar</option><option>Madhya Pradesh</option><option>Rajasthan</option><option>Gujarat</option><option>West Bengal</option><option>Andhra Pradesh</option><option>Tamil Nadu</option><option>Karnataka</option><option>Telangana</option><option>Odisha</option><option>Jharkhand</option><option>Chhattisgarh</option><option>Haryana</option><option>Punjab</option><option>Uttarakhand</option><option>Himachal Pradesh</option><option>Delhi</option><option>Other</option></select>
+        </div>
+        <div class="field"><label><span class="field-num">18</span>PIN Code<span style="color:var(--saffron)">*</span></label><input type="text" placeholder="6-digit PIN" maxlength="6" required></div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">📄 Documents Required (Attach Xerox Copies)</div>
+      <div class="doc-list">
+        <label class="doc-item"><input type="checkbox"> <span class="doc-icon">🪪</span> Aadhaar Card Xerox</label>
+        <label class="doc-item"><input type="checkbox"> <span class="doc-icon">💳</span> PAN Card Xerox</label>
+        <label class="doc-item"><input type="checkbox"> <span class="doc-icon">📸</span> Passport Size Photo</label>
+        <label class="doc-item"><input type="checkbox"> <span class="doc-icon">📋</span> Latest Marksheet / Percentage Proof</label>
+        <label class="doc-item"><input type="checkbox"> <span class="doc-icon">📜</span> Income Certificate</label>
+        <label class="doc-item"><input type="checkbox"> <span class="doc-icon">📑</span> Caste Certificate (for SC/ST candidates)</label>
+        <label class="doc-item"><input type="checkbox"> <span class="doc-icon">✍️</span> Unemployment Declaration</label>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">✅ Applicant Declaration</div>
+      <div class="notice-box" style="margin-bottom:16px; background:#f0f8ff; border-color:#93c5fd; color:#1e3a5f;">
+        I hereby declare that all information submitted in this form is true and correct. I understand that submitting false information may result in rejection of this application.
+      </div>
+      <label class="radio-opt" style="font-size:13px; margin-bottom:16px; display:flex; align-items:flex-start; gap:8px;">
+        <input type="checkbox" required style="margin-top:2px; accent-color:#FF6B00;">
+        I agree to the above declaration and confirm all information is accurate. <span style="color:#FF6B00">*</span>
+      </label>
+      <div class="sig-row">
+        <div class="sig-wrap">
+          <label>Applicant Signature <span style="color:#FF6B00">*</span></label>
+          <div class="sig-canvas-wrap" id="sigWrap1">
+            <canvas id="sigCanvas1" width="320" height="100"></canvas>
+            <div class="sig-placeholder">✍️ Draw your signature here</div>
+          </div>
+          <div class="sig-actions"><button type="button" class="sig-clear" onclick="clearSig(1)">✕ Clear</button></div>
+        </div>
+        <div class="sig-wrap">
+          <label>Parent / Guardian Signature</label>
+          <div class="sig-canvas-wrap" id="sigWrap2">
+            <canvas id="sigCanvas2" width="320" height="100"></canvas>
+            <div class="sig-placeholder">✍️ Draw guardian signature here</div>
+          </div>
+          <div class="sig-actions"><button type="button" class="sig-clear" onclick="clearSig(2)">✕ Clear</button></div>
+        </div>
+      </div>
+      <div class="field" style="margin-top:13px; max-width:200px">
+        <label>Date</label>
+        <input type="date" id="formDate">
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button type="submit" class="btn-submit">🚀 Submit Application</button><br>
+      <button type="button" class="print-btn" onclick="window.print()">🖨️ Print Form</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // ── DATE ──
+  document.getElementById('formDate').valueAsDate = new Date();
+
+  // ── SLIDER ──
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  let timer = setInterval(() => changeSlide(1), 3500);
+  function goSlide(n) {
+    slides[current].classList.remove('active'); dots[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active'); dots[current].classList.add('active');
+    clearInterval(timer); timer = setInterval(() => changeSlide(1), 3500);
+  }
+  function changeSlide(dir) { goSlide((current + dir + slides.length) % slides.length); }
+
+  // ── PHOTO UPLOAD ──
+  const photoInput = document.getElementById('photoInput');
+  const photoPreview = document.getElementById('photoPreview');
+  const photoBox = document.getElementById('photoBox');
+  const photoWrap = document.getElementById('photoWrap');
+  photoInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      photoPreview.src = e.target.result;
+      photoBox.classList.add('has-photo');
+      photoWrap.classList.add('has-photo');
+    };
+    reader.readAsDataURL(file);
+  });
+  function clearPhoto() {
+    photoInput.value = '';
+    photoPreview.src = '';
+    photoBox.classList.remove('has-photo');
+    photoWrap.classList.remove('has-photo');
+  }
+
+  // ── SIGNATURE ──
+  function initCanvas(canvasId, wrapId) {
+    const canvas = document.getElementById(canvasId);
+    const wrap = document.getElementById(wrapId);
+    const ctx = canvas.getContext('2d');
+    ctx.strokeStyle = '#000080'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    let drawing = false, hasSigned = false;
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const src = e.touches ? e.touches[0] : e;
+      return { x: src.clientX - rect.left, y: src.clientY - rect.top };
+    }
+    function startDraw(e) { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }
+    function draw(e) { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); if (!hasSigned) { hasSigned = true; wrap.classList.add('signed'); } }
+    function endDraw(e) { e.preventDefault(); drawing = false; }
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', endDraw);
+    canvas.addEventListener('mouseleave', endDraw);
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove', draw, { passive: false });
+    canvas.addEventListener('touchend', endDraw, { passive: false });
+    return { canvas, ctx, wrap, clear() { ctx.clearRect(0, 0, canvas.width, canvas.height); hasSigned = false; wrap.classList.remove('signed'); } };
+  }
+  const sig1 = initCanvas('sigCanvas1', 'sigWrap1');
+  const sig2 = initCanvas('sigCanvas2', 'sigWrap2');
+  function clearSig(n) { n === 1 ? sig1.clear() : sig2.clear(); }
+
+  // ── SUBMIT (FIXED: no base64 photo/signature in payload) ──
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const formData = {
+      full_name: document.querySelectorAll('input[type="text"]')[0].value,
+      dob: document.querySelector('input[type="date"]').value,
+      parent_name: document.querySelectorAll('input[type="text"]')[1].value,
+      single_parent_name: document.querySelectorAll('input[type="text"]')[2].value,
+      gender: document.querySelector('input[name="gender"]:checked').value,
+      marital_status: document.querySelector('input[name="marital"]:checked').value,
+      mobile: document.querySelector('input[type="tel"]').value,
+      email: document.querySelector('input[type="email"]').value,
+      aadhaar: document.getElementById('aadhaar').value,
+      pan: document.getElementById('pan').value,
+      qualification: document.querySelectorAll('select')[0].value,
+      college: document.querySelectorAll('input[type="text"]')[3].value,
+      course: document.querySelectorAll('input[type="text"]')[4].value,
+      percentage: document.querySelectorAll('input[type="text"]')[5].value,
+      employment_status: document.querySelectorAll('select')[1].value,
+      family_income: document.querySelector('input[type="number"]').value,
+      category: document.querySelectorAll('select')[2].value,
+      smartphone: document.querySelector('input[name="smartphone"]:checked').value,
+      address: document.querySelector('textarea').value,
+      district: document.querySelectorAll('input[type="text"]')[6].value,
+      state: document.querySelectorAll('select')[3].value,
+      pincode: document.querySelectorAll('input[type="text"]')[7].value
+    };
+
+    try {
+      const response = await fetch("http://32.197.180.193:5000/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("Application Submitted Successfully");
+      } else {
+        alert("Failed to save data");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Backend Server Error");
+    }
+  }
+
+  // ── AADHAAR FORMAT ──
+  document.getElementById('aadhaar').addEventListener('input', function () {
+    let v = this.value.replace(/\D/g, '').slice(0, 12);
+    this.value = v.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+  });
+
+  // ── PAN UPPERCASE ──
+  document.getElementById('pan').addEventListener('input', function () {
+    this.value = this.value.toUpperCase();
+  });
+
+  // ── RESIZE CANVASES ──
+  function resizeCanvases() {
+    [sig1, sig2].forEach(sig => {
+      const w = sig.canvas.parentElement.clientWidth;
+      if (w > 0) sig.canvas.width = w;
+    });
+  }
+  resizeCanvases();
+  window.addEventListener('resize', resizeCanvases);
+</script>
+</body>
+</html>
+
