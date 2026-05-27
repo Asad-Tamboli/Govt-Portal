@@ -1,0 +1,8 @@
+.cache/
+.docker/
+.ssh/
+.gitconfig
+.bash_history
+.viminfo
+node_modules/
+
