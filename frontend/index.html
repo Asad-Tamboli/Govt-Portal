@@ -413,11 +413,12 @@
 
       const result = await response.json();
 
-      if (result.success) {
-        alert("Application Submitted Successfully");
-      } else {
-        alert("Failed to save data");
-      }
+    if (result.success) {
+    alert("Application Submitted Successfully");
+    window.location.reload();
+} else {
+    alert("Failed to save data");
+}
     } catch (err) {
       console.error(err);
       alert("Backend Server Error");
